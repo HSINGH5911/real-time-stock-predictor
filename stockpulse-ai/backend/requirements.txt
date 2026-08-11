@@ -1,0 +1,80 @@
+# ==========================
+# Web Framework
+# ==========================
+fastapi
+uvicorn[standard]
+
+# ==========================
+# Data Processing
+# ==========================
+pandas
+numpy
+
+# ==========================
+# Machine Learning
+# ==========================
+scikit-learn
+joblib
+
+# ==========================
+# NLP / Sentiment Analysis
+# ==========================
+transformers
+torch
+sentencepiece
+
+# ==========================
+# Market Data
+# ==========================
+yfinance
+
+# ==========================
+# HTTP Requests
+# ==========================
+requests
+httpx
+
+# ==========================
+# Scheduling
+# ==========================
+apscheduler
+
+# ==========================
+# Environment Variables
+# ==========================
+python-dotenv
+
+# ==========================
+# Validation
+# ==========================
+pydantic
+pydantic-settings
+
+# ==========================
+# Logging
+# ==========================
+loguru
+
+# ==========================
+# Testing
+# ==========================
+pytest
+pytest-asyncio
+
+# ==========================
+# Development
+# ==========================
+black
+ruff
+mypy
+
+# ==========================
+# Optional Explainability
+# ==========================
+shap
+
+# ==========================
+# Optional Gradient Boosting
+# ==========================
+xgboost
+lightgbm

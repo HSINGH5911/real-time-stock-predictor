@@ -1,0 +1,276 @@
+StockPulse AI - Project Roadmap
+
+Project Goal
+
+Build a real-time market intelligence platform that ingests financial
+news, social media, and market data, stores and processes it using a
+custom Redis database, predicts short-term stock movement using machine
+learning, and displays everything in a live dashboard.
+
+------------------------------------------------------------------------
+
+Tech Stack
+
+Backend
+
+-   Python 3.12
+-   FastAPI
+-   Uvicorn
+-   Custom Redis Database
+-   APScheduler (or FastAPI Background Tasks)
+-   Pandas
+-   NumPy
+-   Scikit-Learn
+-   Hugging Face Transformers
+-   FinBERT
+-   yfinance
+-   Requests
+
+Frontend
+
+-   React
+-   TypeScript
+-   Tailwind CSS
+-   Recharts
+-   Axios
+
+Machine Learning
+
+-   Scikit-Learn
+-   Random Forest
+-   XGBoost (optional)
+-   SHAP (optional)
+
+DevOps
+
+-   Docker
+-   Docker Compose
+-   GitHub Actions
+
+------------------------------------------------------------------------
+
+APIs
+
+Market Data
+
+-   yfinance (Yahoo Finance)
+-   Alpha Vantage
+-   Finnhub
+
+News
+
+-   MarketAux (preferred)
+-   NewsAPI
+-   GNews
+
+Social
+
+-   Reddit (PRAW)
+
+SEC
+
+-   EDGAR API
+
+------------------------------------------------------------------------
+
+High-Level Architecture
+
+External APIs 
+        ↓ 
+Data Ingestion Workers 
+        ↓ 
+Redis Streams 
+        ↓ 
+Sentiment & Market Workers 
+        ↓  
+Feature Engineering 
+        ↓  
+Machine Learning Model
+        ↓  
+FastAPI
+        ↓  
+React Dashboard
+
+------------------------------------------------------------------------
+
+Project Structure
+
+stockpulse-ai/ 
+│ 
+├── backend/ 
+│ ├── api/ 
+│ ├── core/ 
+│ ├── database/ 
+│ ├── workers/ 
+│ ├── services/ 
+│ ├── ml/ 
+│ ├── models/ 
+│ ├── utils/ 
+│ └──tests/
+|
+├── frontend/
+│ ├── components/ 
+│ ├── pages/ 
+│ ├── hooks/ 
+│ ├── services/ 
+│ ├── charts/ 
+│ ├── utils/ 
+│ └── types/ 
+│ 
+├── docker/ 
+├── README.md 
+├── docker-compose.yml 
+├── requirements.txt 
+└── .env
+
+------------------------------------------------------------------------
+
+Backend API
+
+Routes - GET /market - GET /stock/{ticker} - GET /predict/{ticker} - GET
+/news - GET /health - POST /train
+
+------------------------------------------------------------------------
+
+Redis Design
+
+Streams - news_stream - reddit_stream - market_stream -
+prediction_stream
+
+Hashes - stock:{ticker} - price - volume - sentiment - prediction -
+confidence
+
+Lists - recent_news:{ticker}
+
+Sorted Sets - trending_stocks
+
+------------------------------------------------------------------------
+
+Data Pipeline
+
+1.  News Worker
+
+-   Fetch latest articles
+-   Push to Redis Stream
+
+2.  Sentiment Worker
+
+-   Read Stream
+-   Run FinBERT
+-   Store sentiment
+
+3.  Market Worker
+
+-   Download market data
+-   Compute indicators
+
+4.  Feature Worker
+
+-   Combine market, news, sentiment
+
+5.  Prediction Worker
+
+-   Run ML model
+-   Store prediction in Redis
+
+------------------------------------------------------------------------
+
+Features
+
+Market - Price - Volume - SMA - EMA - RSI - MACD - Bollinger Bands -
+Volatility
+
+News - Headline - Sentiment - Confidence - Article count
+
+Social - Reddit mentions - Upvotes - Comment count - Sentiment
+
+Events - Earnings - CEO changes - Acquisitions - Product launches - FDA
+approvals - Dividends - Stock splits
+
+------------------------------------------------------------------------
+
+Machine Learning
+
+Target - Predict UP or DOWN
+
+Time Horizons - 30 minutes - 1 hour - Next trading day
+
+Initial Model - Random Forest
+
+Future Models - XGBoost - LightGBM - CatBoost - LSTM - Transformer
+
+Metrics - Accuracy - Precision - Recall - F1 Score - Confusion Matrix
+
+------------------------------------------------------------------------
+
+Frontend Dashboard
+
+Pages - Dashboard - Stock Details - Predictions - Trending - Settings
+
+Components - Stock Card - News Card - Prediction Card - Sentiment
+Gauge - Price Chart - Heatmap - Top Movers
+
+Charts - Price - Volume - Sentiment - Prediction Confidence - Mentions
+
+------------------------------------------------------------------------
+
+Scheduler
+
+Every Minute - Download News - Download Prices
+
+Every 5 Minutes - Generate Predictions
+
+Every Hour - Retrain Model (optional)
+
+------------------------------------------------------------------------
+
+Docker
+
+Containers - Backend - Frontend - Redis Database - Workers
+
+------------------------------------------------------------------------
+
+CI/CD
+
+GitHub Actions - Unit Tests - API Tests - Linting - Type Checking -
+Docker Build
+
+------------------------------------------------------------------------
+
+One Week Roadmap
+
+Day 1 - Project setup - Backend - Frontend - Docker - Redis
+integration - News ingestion - Market ingestion
+
+Day 2 - FinBERT - Sentiment worker - Store processed data
+
+Day 3 - Technical indicators - Feature engineering - Dataset generation
+
+Day 4 - Train Random Forest - Evaluate model - Save trained model
+
+Day 5 - Prediction API - Background prediction worker - Feature
+importance
+
+Day 6 - React dashboard - Charts - News feed - Predictions - Watchlist
+
+Day 7 - Dockerize - GitHub Actions - README - Screenshots - Deployment
+
+------------------------------------------------------------------------
+
+Stretch Goals
+
+-   Backtesting engine
+-   SHAP explainability
+-   WebSockets
+-   LLM-powered news summaries
+-   Portfolio tracking
+-   Ensemble models
+
+------------------------------------------------------------------------
+
+Resume Highlights
+
+This project demonstrates: - Distributed systems - Event-driven
+architecture - Custom Redis implementation - REST API development -
+Machine learning - NLP with FinBERT - Full-stack development - Docker -
+CI/CD - Data engineering - Real-time analytics

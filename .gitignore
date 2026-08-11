@@ -1,0 +1,36 @@
+# Environment variables
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+
+# Python & Virtual Environments
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+ENV/
+env/
+
+# Custom Redis DB dump
+dump.rdb
+*.rdb
+**/dump.rdb
+
+# Node & Frontend Build
+node_modules/
+**/node_modules/
+dist/
+build/
+.npm/
+
+# IDEs & System
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+*.log

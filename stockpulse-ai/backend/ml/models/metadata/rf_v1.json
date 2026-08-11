@@ -1,0 +1,63 @@
+{
+  "model": "RandomForestClassifier",
+  "version": "rf_v1",
+  "trained_at": "2026-08-08T20:07:18.704548+00:00",
+  "features": [
+    "Close",
+    "Volume",
+    "RSI_14",
+    "SMA_20",
+    "Price_SMA_Ratio",
+    "MACD_Line",
+    "MACD_Signal",
+    "MACD_Hist",
+    "Volatility_20",
+    "Sentiment_Avg",
+    "Positive_Ratio",
+    "Negative_Ratio",
+    "Article_Count",
+    "earnings_flag",
+    "product_launch_flag",
+    "ceo_change_flag",
+    "merger_flag",
+    "dividend_flag"
+  ],
+  "metrics": {
+    "accuracy": 0.4959,
+    "precision": 0.4731,
+    "recall": 0.7719,
+    "f1_score": 0.5867,
+    "confusion_matrix": [
+      [
+        17,
+        49
+      ],
+      [
+        13,
+        44
+      ]
+    ]
+  },
+  "feature_importances": {
+    "Volume": 0.1646,
+    "SMA_20": 0.123,
+    "RSI_14": 0.1147,
+    "Price_SMA_Ratio": 0.1145,
+    "MACD_Line": 0.105,
+    "Close": 0.0984,
+    "MACD_Hist": 0.0975,
+    "MACD_Signal": 0.0961,
+    "Volatility_20": 0.0862,
+    "Sentiment_Avg": 0.0,
+    "Positive_Ratio": 0.0,
+    "Negative_Ratio": 0.0,
+    "Article_Count": 0.0,
+    "earnings_flag": 0.0,
+    "product_launch_flag": 0.0,
+    "ceo_change_flag": 0.0,
+    "merger_flag": 0.0,
+    "dividend_flag": 0.0
+  },
+  "training_rows": 492,
+  "testing_rows": 123
+}

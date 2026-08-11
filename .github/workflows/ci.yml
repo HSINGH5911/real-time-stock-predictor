@@ -1,0 +1,82 @@
+name: StockPulse AI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  backend-test:
+    name: Backend Tests & Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: 'stockpulse-ai/backend/requirements.txt'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f stockpulse-ai/backend/requirements.txt ]; then pip install -r stockpulse-ai/backend/requirements.txt; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Backend Unit & Integration Tests
+        env:
+          PYTHONPATH: stockpulse-ai/backend
+        run: |
+          python -m unittest discover -s stockpulse-ai/backend/tests -t stockpulse-ai/backend
+
+  frontend-build:
+    name: Frontend Typecheck & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: stockpulse-ai/frontend/package-lock.json
+
+      - name: Install Node dependencies
+        working-directory: stockpulse-ai/frontend
+        run: npm ci
+
+      - name: TypeScript Verification & Vite Build
+        working-directory: stockpulse-ai/frontend
+        run: |
+          npm run build
+
+  docker-build:
+    name: Docker Build Verification
+    runs-on: ubuntu-latest
+    needs: [backend-test, frontend-build]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Backend Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./stockpulse-ai/backend
+          file: ./stockpulse-ai/backend/DockerFile
+          push: false
+
+      - name: Build Frontend Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./stockpulse-ai/frontend
+          file: ./stockpulse-ai/frontend/DockerFile
+          push: false
